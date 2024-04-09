@@ -1,17 +1,43 @@
-import { Request, Response } from "express";
-import { User } from "../models/user";
-import { UserService } from "../services/userService";
+import { Request, Response } from 'express';
+import { UserService } from '../services/userService';
 
 export class UserController {
-  static getAllUsers(req: Request, res: Response): void {
-    const users = UserService.getAllUsers();
-    res.json(users);
+  private userService: UserService;
+
+  constructor(userService: UserService) {
+    this.userService = userService;
   }
 
-  static addUser(req: Request, res: Response): void {
-    const { id, name, email } = req.body as User;
-    const newUser: User = { id, name, email };
-    UserService.addUser(newUser);
-    res.status(201).send("User added successfully");
+  async getAllUsers(req: Request, res: Response): Promise<void> {
+    try {
+      const users = await this.userService.getAllUsers();
+      res.json(users);
+    } catch (err) {
+      console.error('Error fetching users:', err);
+      res.status(500).send('Error fetching users');
+    }
+  }
+
+  async addUser(req: Request, res: Response): Promise<void> {
+    const user = req.body;
+    try {
+      const newUser = await this.userService.addUser(user);
+      res.status(201).json(newUser);
+    } catch (err) {
+      console.error('Error adding user:', err);
+      res.status(500).send('Error adding user');
+    }
+  }
+
+  async updateUser(req: Request, res: Response): Promise<void> {
+    const id: number = parseInt(req.params.id, 10);
+    const user = req.body;
+    try {
+      const updatedUser = await this.userService.updateUser(id, user);
+      res.json(updatedUser);
+    } catch (err) {
+      console.error('Error updating user:', err);
+      res.status(500).send('Error updating user');
+    }
   }
 }

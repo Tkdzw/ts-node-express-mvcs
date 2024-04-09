@@ -1,9 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
-import userRouter from "./routes/user.routes";
 import dotenv from 'dotenv';
 import routes from "./routes/routesIndex";
-
+import sequelize from "./sequalize";
 
 // Load environment variables based on NODE_ENV
 if (process.env.NODE_ENV === "production") {
@@ -19,6 +18,19 @@ app.use(bodyParser.json());
 
 // Use the userRouter for all routes related to users
 app.use(routes);
+
+// Sync Sequelize models with the database
+sequelize
+  .sync()
+  .then(() => {
+    console.log('Database synced');
+   
+  })
+  .catch((err: any) => { // Use type assertion here
+    console.error('Error syncing database:', err);
+  });
+
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
