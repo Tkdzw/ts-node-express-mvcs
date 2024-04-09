@@ -20,13 +20,13 @@ This boilerplate provides a foundation for building TypeScript-based Node.js app
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/your-project.git
+   git clone https://github.com/your-username/ts-node-express-mvcs.git
    ```
 
 2. Install dependencies:
 
    ```bash
-   cd your-project
+   cd ts-node-express-mvcs
    npm install
    ```
 

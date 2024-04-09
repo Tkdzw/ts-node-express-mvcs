@@ -1,16 +1,15 @@
 import { Router } from "express";
 import { UserController } from "../controllers/userController";
 import { UserService } from '../services/userService';
+import { UserRepository } from "../repositories/userRepository";
 
-// Instantiate UserService
-const userService = new UserService();
-
-// Instantiate UserController with UserService injected
-const userController = new UserController(userService);
+const userRepository = new UserRepository();
+const userService = new UserService(userRepository);
+const userController = new UserController(userService); // Create UserController instance with UserService dependency
 
 const userRouter = Router();
 
-userRouter.get("/", userController.getAllUsers);
-userRouter.post("/", userController.addUser);
+userRouter.get("/", userController.getAllUsers.bind(userController)); // Bind the instance method to the controller instance
+userRouter.post("/", userController.addUser.bind(userController)); // Bind the instance method to the controller instance
 
 export default userRouter;
