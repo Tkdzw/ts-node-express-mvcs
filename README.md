@@ -31,7 +31,7 @@ This boilerplate provides a foundation for building TypeScript-based Node.js app
    ```
 
 3. Set up environment variables:
-   
+
    Create a `.env` file in the root directory and add necessary environment variables.
 
 4. Start the development server:
