@@ -1,7 +1,3 @@
-Certainly! Here's a sample README in Markdown format for a TypeScript Node.js Express boilerplate using an MVCS (Model, View, Controller, Service) structure:
-
----
-
 # TypeScript Node.js Express Boilerplate
 
 This boilerplate provides a foundation for building TypeScript-based Node.js applications using the Express framework and following the MVCS (Model, View, Controller, Service) architecture.
