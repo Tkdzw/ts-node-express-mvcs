@@ -33,7 +33,7 @@ export class UserService {
     }
   }
 
-  async addUser(user: UserCreateRequestDto): Promise<ServiceResponseDto<User>> {
+  async addUser(user: UserCreateRequestDto): Promise<ServiceResponseDto<UserDto>> {
     try {
       const newUser = await this._userRepository.addUser(user);
       return {
